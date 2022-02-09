@@ -103,11 +103,27 @@ function handleCellClick(cell, index) {
   }
 }
 function initCellElementList() {
+  //setIndex for each Li
   const cellEleList = getCellElementList();
 
   cellEleList.forEach((cell, index) => {
-    cell.addEventListener("click", () => handleCellClick(cell, index));
-  });
+    cell.dataset.idx = index; 
+   });
+
+  const ulEle = getUlEle();
+  const index = 0; 
+  if (ulEle) {
+    ulEle.addEventListener('click',(event)=>{
+      if (event.target.tagName !== 'LI') return; 
+      const index = Number.parseInt(event.target.dataset.idx) ; 
+      handleCellClick(event.target, index); 
+    })
+  }; 
+  // const cellEleList = getCellElementList();
+
+  // cellEleList.forEach((cell, index) => {
+  //   cell.addEventListener("click", () => handleCellClick(cell, index));
+  // });
 }
 function resetGame(){
   //reset temp global
